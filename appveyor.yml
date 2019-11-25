@@ -1,0 +1,26 @@
+
+version: build{build}
+image: Visual Studio 2019
+clone_folder: C:\CKli-World\CK-Database-Projects\CK-DB-Twitter
+services: mssql2017
+branches:
+  only:
+    - master
+    - develop
+environment:
+  SqlServer/MasterConnectionString: Server=(local)\SQL2017;Database=master;User ID=sa;Password=Password12!
+  CODECAKEBUILDER_SECRET_KEY:
+    secure: 8VAzdXgUQaJyFoU3WLf2iPFV/8zPDm9qV4TfOpx8/rg=
+artifacts:
+  - path: '**\*.log'
+    name: Log file
+  - path: '**\*.trx'
+    name: Visual studio test results file
+  - path: '**\Tests\**\TestResult*.xml'
+    name: NUnit tests result files
+  - path: '**Tests\**\Logs\**\*'
+    name: Log files
+build_script:
+  - dotnet run --project CodeCakeBuilder -nointeraction
+test: off
+install: []

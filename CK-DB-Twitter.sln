@@ -1,0 +1,68 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2020
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DD8E9B65-DF41-40CF-9995-5965585CF72E}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		appveyor.yml = appveyor.yml
+		nuget.config = nuget.config
+		RepositoryInfo.xml = RepositoryInfo.xml
+		Common\Shared.props = Common\Shared.props
+		Common\SharedKey.snk = Common\SharedKey.snk
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5E754B9E-84B8-426A-95B0-858D3EDCC19B}"
+	ProjectSection(SolutionItems) = preProject
+		Tests\TestHelper.config = Tests\TestHelper.config
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeCakeBuilder", "CodeCakeBuilder\CodeCakeBuilder.csproj", "{FD4817B6-3CD7-4E74-AA10-7CA95FDFCF2D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.DB.User.UserTwitter", "CK.DB.User.UserTwitter\CK.DB.User.UserTwitter.csproj", "{73E204F2-01B9-4F42-9766-44AEF8D18536}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.DB.User.UserTwitter.Tests", "Tests\CK.DB.User.UserTwitter.Tests\CK.DB.User.UserTwitter.Tests.csproj", "{252CE7CB-A1BB-416D-90CA-9EF8DFED3429}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.DB.User.UserTwitter.AuthScope", "CK.DB.User.UserTwitter.AuthScope\CK.DB.User.UserTwitter.AuthScope.csproj", "{55449B0C-6005-4EB4-8543-58869A5E3AAD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.DB.User.UserTwitter.AuthScope.Tests", "Tests\CK.DB.User.UserTwitter.AuthScope.Tests\CK.DB.User.UserTwitter.AuthScope.Tests.csproj", "{3D45FE9D-6A4D-4DBB-8046-D43E34CE5BF7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FD4817B6-3CD7-4E74-AA10-7CA95FDFCF2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD4817B6-3CD7-4E74-AA10-7CA95FDFCF2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD4817B6-3CD7-4E74-AA10-7CA95FDFCF2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD4817B6-3CD7-4E74-AA10-7CA95FDFCF2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73E204F2-01B9-4F42-9766-44AEF8D18536}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73E204F2-01B9-4F42-9766-44AEF8D18536}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73E204F2-01B9-4F42-9766-44AEF8D18536}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73E204F2-01B9-4F42-9766-44AEF8D18536}.Release|Any CPU.Build.0 = Release|Any CPU
+		{252CE7CB-A1BB-416D-90CA-9EF8DFED3429}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{252CE7CB-A1BB-416D-90CA-9EF8DFED3429}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{252CE7CB-A1BB-416D-90CA-9EF8DFED3429}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{252CE7CB-A1BB-416D-90CA-9EF8DFED3429}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55449B0C-6005-4EB4-8543-58869A5E3AAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55449B0C-6005-4EB4-8543-58869A5E3AAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55449B0C-6005-4EB4-8543-58869A5E3AAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55449B0C-6005-4EB4-8543-58869A5E3AAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D45FE9D-6A4D-4DBB-8046-D43E34CE5BF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D45FE9D-6A4D-4DBB-8046-D43E34CE5BF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D45FE9D-6A4D-4DBB-8046-D43E34CE5BF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D45FE9D-6A4D-4DBB-8046-D43E34CE5BF7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{252CE7CB-A1BB-416D-90CA-9EF8DFED3429} = {5E754B9E-84B8-426A-95B0-858D3EDCC19B}
+		{3D45FE9D-6A4D-4DBB-8046-D43E34CE5BF7} = {5E754B9E-84B8-426A-95B0-858D3EDCC19B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5044F9DA-815D-48CE-A4EE-9FA49432D361}
+	EndGlobalSection
+EndGlobal

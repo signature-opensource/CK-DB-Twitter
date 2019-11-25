@@ -1,0 +1,10 @@
+-- SetupConfig: { "AddRequires": "Model.CK.UserTwitterTable" } 
+-- 
+create transformer on CK.vUserAuthProvider
+as
+begin
+	inject "
+	union all
+	select UserId, 'Twitter', LastLoginTime from CK.tUserTwitter where UserId > 0
+	" after first part {select};
+end

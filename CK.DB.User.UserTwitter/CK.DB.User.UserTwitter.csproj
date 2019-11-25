@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\Common\Shared.props" />
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+    <Description>This package defines tUserTwitter table.</Description>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="CK.DB.Auth" Version="$(CKDBVersion)" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="**\*.sql;**\*.tql;**\*.y4" Exclude="bin\**;obj\**;@(EmbeddedResource)" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+</Project>

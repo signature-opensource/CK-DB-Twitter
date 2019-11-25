@@ -1,0 +1,14 @@
+using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CK.DB.User.UserTwitter.Tests.From
+{
+    [TestFixture]
+    public class FromAuthTests : CK.DB.Auth.Tests.AuthTests
+    {
+    }
+}
