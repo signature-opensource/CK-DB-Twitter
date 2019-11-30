@@ -55,15 +55,15 @@ namespace CK.DB.User.UserTwitter
         /// Returns null if no such user exists.
         /// </summary>
         /// <param name="ctx">The call context to use.</param>
-        /// <param name="googleAccountId">The google account identifier.</param>
+        /// <param name="twitterAccountId">The Twitter account identifier.</param>
         /// <returns>A <see cref="IdentifiedUserInfo{T}"/> or null if not found.</returns>
-        public IdentifiedUserInfo<IUserTwitterInfo> FindKnownUserInfo( ISqlCallContext ctx, string googleAccountId )
+        public IdentifiedUserInfo<IUserTwitterInfo> FindKnownUserInfo( ISqlCallContext ctx, string twitterAccountId )
         {
-            using( var c = CreateReaderCommand( googleAccountId ) )
+            using( var c = CreateReaderCommand( twitterAccountId ) )
             {
                 return ctx[Database].ExecuteSingleRow( c, r => r == null
                                                             ? null
-                                                            : DoCreateUserUnfo( googleAccountId, r ) );
+                                                            : DoCreateUserUnfo( twitterAccountId, r ) );
             }
         }
 

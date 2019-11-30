@@ -16,18 +16,18 @@ namespace CK.DB.User.UserTwitter.AuthScope
     public class Package : SqlPackage
     {
         AuthScopeSetTable _scopeSetTable;
-        UserTwitterTable _googleTable;
+        UserTwitterTable _TwitterTable;
 
-        void StObjConstruct( AuthScopeSetTable scopeSetTable, UserTwitterTable googleTable )
+        void StObjConstruct( AuthScopeSetTable scopeSetTable, UserTwitterTable TwitterTable )
         {
             _scopeSetTable = scopeSetTable;
-            _googleTable = googleTable;
+            _TwitterTable = TwitterTable;
         }
 
         /// <summary>
         /// Gets the <see cref="UserTwitterTable"/>.
         /// </summary>
-        public UserTwitterTable UserTwitterTable => _googleTable;
+        public UserTwitterTable UserTwitterTable => _TwitterTable;
 
         /// <summary>
         /// Gets the <see cref="AuthScopeSetTable"/>.

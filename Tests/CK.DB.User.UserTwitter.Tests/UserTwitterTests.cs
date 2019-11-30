@@ -26,20 +26,20 @@ namespace CK.DB.User.UserTwitter.Tests
             {
                 var userName = Guid.NewGuid().ToString();
                 int userId = user.CreateUser( ctx, 1, userName );
-                var googleAccountId = Guid.NewGuid().ToString( "N" );
+                var twitterAccountId = Guid.NewGuid().ToString( "N" );
 
                 var info = infoFactory.Create();
-                info.TwitterAccountId = googleAccountId;
+                info.TwitterAccountId = twitterAccountId;
                 var created = u.CreateOrUpdateTwitterUser( ctx, 1, userId, info );
                 created.OperationResult.Should().Be( UCResult.Created );
-                var info2 = u.FindKnownUserInfo( ctx, googleAccountId );
+                var info2 = u.FindKnownUserInfo( ctx, twitterAccountId );
 
                 info2.UserId.Should().Be( userId );
-                info2.Info.TwitterAccountId.Should().Be( googleAccountId );
+                info2.Info.TwitterAccountId.Should().Be( twitterAccountId );
 
                 u.FindKnownUserInfo( ctx, Guid.NewGuid().ToString() ).Should().BeNull();
                 user.DestroyUser( ctx, 1, userId );
-                u.FindKnownUserInfo( ctx, googleAccountId ).Should().BeNull();
+                u.FindKnownUserInfo( ctx, twitterAccountId ).Should().BeNull();
             }
         }
 
@@ -53,20 +53,20 @@ namespace CK.DB.User.UserTwitter.Tests
             {
                 var userName = Guid.NewGuid().ToString();
                 int userId = await user.CreateUserAsync( ctx, 1, userName );
-                var googleAccountId = Guid.NewGuid().ToString( "N" );
+                var TwitterAccountId = Guid.NewGuid().ToString( "N" );
 
                 var info = infoFactory.Create();
-                info.TwitterAccountId = googleAccountId;
+                info.TwitterAccountId = TwitterAccountId;
                 var created = await u.CreateOrUpdateTwitterUserAsync( ctx, 1, userId, info );
                 created.OperationResult.Should().Be( UCResult.Created );
-                var info2 = await u.FindKnownUserInfoAsync( ctx, googleAccountId );
+                var info2 = await u.FindKnownUserInfoAsync( ctx, TwitterAccountId );
 
                 info2.UserId.Should().Be( userId );
-                info2.Info.TwitterAccountId.Should().Be( googleAccountId );
+                info2.Info.TwitterAccountId.Should().Be( TwitterAccountId );
 
                 (await u.FindKnownUserInfoAsync( ctx, Guid.NewGuid().ToString() )).Should().BeNull();
                 await user.DestroyUserAsync( ctx, 1, userId );
-                (await u.FindKnownUserInfoAsync( ctx, googleAccountId )).Should().BeNull();
+                (await u.FindKnownUserInfoAsync( ctx, TwitterAccountId )).Should().BeNull();
             }
         }
 
@@ -84,12 +84,12 @@ namespace CK.DB.User.UserTwitter.Tests
             using( var ctx = new SqlStandardCallContext() )
             {
                 string userName = "Twitter auth - " + Guid.NewGuid().ToString();
-                var googleAccountId = Guid.NewGuid().ToString( "N" );
+                var TwitterAccountId = Guid.NewGuid().ToString( "N" );
                 var idU = user.CreateUser( ctx, 1, userName );
                 u.Database.ExecuteReader( $"select * from CK.vUserAuthProvider where UserId={idU} and Scheme='Twitter'" )
                     .Rows.Should().BeEmpty();
                 var info = u.CreateUserInfo<IUserTwitterInfo>();
-                info.TwitterAccountId = googleAccountId;
+                info.TwitterAccountId = TwitterAccountId;
                 u.CreateOrUpdateTwitterUser( ctx, 1, idU, info );
                 u.Database.ExecuteScalar( $"select count(*) from CK.vUserAuthProvider where UserId={idU} and Scheme='Twitter'" )
                     .Should().Be( 1 );
