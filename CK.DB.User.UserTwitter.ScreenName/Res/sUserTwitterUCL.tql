@@ -1,0 +1,18 @@
+-- SetupConfig: {}
+--
+create transformer on CK.sUserTwitterUCL
+as
+begin
+	add parameter @ScreenName nvarchar(50) = null;
+
+	in single statement {insert into CK.tUserTwitter}
+	begin
+		add column	ScreenName = case when @ScreenName is not null then @ScreenName else N'' end;
+	end
+
+	in first statement {update CK.tUserTwitter}
+	begin
+		add column ScreenName = case when @ScreenName is not null then @ScreenName else ScreenName end;
+	end
+
+end

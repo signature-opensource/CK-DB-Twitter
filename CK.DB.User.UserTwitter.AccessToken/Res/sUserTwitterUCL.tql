@@ -1,0 +1,42 @@
+-- SetupConfig: {}
+--
+create transformer on CK.sUserTwitterUCL
+as
+begin
+	add parameter @AccessToken varchar(max) = null, @AccessTokenSecret varchar(max) = null;
+
+    inject "
+        if (@AccessToken is null and @AccessTokenSecret is not null) or (@AccessToken is not null and @AccessTokenSecret is null)
+            throw 50000, 'Argument.AccessAndScecretTokenBothNullOrNot', 1;
+    "
+    before single "--[beginsp]";
+
+    inject "
+        declare @AllowTokenStore bit;
+    "
+    after single statement {declare @Now datetime2(2)};
+
+    in before single "--<PreCreateOrUpdate"
+        in single statement {select}
+        begin
+            add column @AllowTokenStore = case when AccessToken = '<NoStorage>' then 0 else 1 end;
+        end
+
+	in single statement {insert into CK.tUserTwitter}
+	begin
+		add column AccessToken = case when @AccessToken is not null then @AccessToken else '' end,
+				   AccessTokenSecret = case when @AccessTokenSecret is not null then @AccessTokenSecret else '' end,
+				   LastWriteTime = case when @AccessToken is not null then @Now else '0001-01-01' end;
+	end
+
+	in first statement {update CK.tUserTwitter}
+	begin
+		add column AccessToken = case when @AccessToken is not null and @AllowTokenStore = 1 then @AccessToken else AccessToken end, 
+				   AccessTokenSecret = case when @AccessTokenSecret is not null and @AllowTokenStore = 1 then @AccessTokenSecret else AccessTokenSecret end, 
+				   LastWriteTime = case when @AccessToken is not null and @AllowTokenStore = 1 and AccessToken <> @AccessToken 
+											then @Now
+											else LastWriteTime
+										   end;
+	end
+
+end

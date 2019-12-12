@@ -111,16 +111,16 @@ namespace CK.DB.User.UserTwitter
         /// Returns null if no such user exists.
         /// </summary>
         /// <param name="ctx">The call context to use.</param>
-        /// <param name="googleAccountId">The google account identifier.</param>
+        /// <param name="twitterAccountId">The Twitter account identifier.</param>
         /// <param name="cancellationToken">Optional cancellation token.</param>
         /// <returns>A <see cref="IdentifiedUserInfo{T}"/> object or null if not found.</returns>
-        public Task<IdentifiedUserInfo<IUserTwitterInfo>> FindKnownUserInfoAsync( ISqlCallContext ctx, string googleAccountId, CancellationToken cancellationToken = default( CancellationToken ) )
+        public Task<IdentifiedUserInfo<IUserTwitterInfo>> FindKnownUserInfoAsync( ISqlCallContext ctx, string twitterAccountId, CancellationToken cancellationToken = default( CancellationToken ) )
         {
-            using( var c = CreateReaderCommand( googleAccountId ) )
+            using( var c = CreateReaderCommand( twitterAccountId ) )
             {
                 return ctx[Database].ExecuteSingleRowAsync( c, r => r == null
                                                                     ? null
-                                                                    : DoCreateUserUnfo( googleAccountId, r ) );
+                                                                    : DoCreateUserUnfo( twitterAccountId, r ) );
             }
         }
 
@@ -128,21 +128,21 @@ namespace CK.DB.User.UserTwitter
         /// Creates a the reader command parametrized with the Twitter account identifier.
         /// Single-row returned columns are defined by <see cref="AppendUserInfoColumns(StringBuilder)"/>.
         /// </summary>
-        /// <param name="googleAccountId">Twitter account identifier to look for.</param>
+        /// <param name="twitterAccountId">Twitter account identifier to look for.</param>
         /// <returns>A ready to use reader command.</returns>
-        SqlCommand CreateReaderCommand( string googleAccountId )
+        SqlCommand CreateReaderCommand( string twitterAccountId )
         {
             StringBuilder b = new StringBuilder( "select " );
             AppendUserInfoColumns( b ).Append( " from CK.tUserTwitter where TwitterAccountId=@A" );
             var c = new SqlCommand( b.ToString() );
-            c.Parameters.Add( new SqlParameter( "@A", googleAccountId ) );
+            c.Parameters.Add( new SqlParameter( "@A", twitterAccountId ) );
             return c;
         }
 
-        IdentifiedUserInfo<IUserTwitterInfo> DoCreateUserUnfo( string googleAccountId, SqlDataRow r )
+        IdentifiedUserInfo<IUserTwitterInfo> DoCreateUserUnfo( string TwitterAccountId, SqlDataRow r )
         {
             var info = _infoFactory.Create();
-            info.TwitterAccountId = googleAccountId;
+            info.TwitterAccountId = TwitterAccountId;
             FillUserTwitterInfo( info, r, 1 );
             return new IdentifiedUserInfo<IUserTwitterInfo>( r.GetInt32( 0 ), info );
         }

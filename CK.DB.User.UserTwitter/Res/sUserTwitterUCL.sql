@@ -10,12 +10,12 @@
 --
 -- When @UserId = 0 we are in "login mode": 
 --  - @Mode must be UpdateOnly+WithCheckLogin (6) or UpdateOnly+WithActualLogin (10).
---    If the google id is found, we update what we have to and output the found @UserId.
+--    If the Twitter id is found, we update what we have to and output the found @UserId.
 --
 -- When @UserId is not 0, it must match with the one of the @TwitterAccountId otherwise it is an error
 -- and an exception is thrown because:
 --  - When updating it means that there is a mismatch of UserId/Twitter account in the calling code.
---  - When creating it means that another user with the same google account is already registered and
+--  - When creating it means that another user with the same Twitter account is already registered and
 --    this should never happen.
 --
 -- When extending this procedure, during update null parameters must be left unchanged.

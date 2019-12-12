@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2020
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29509.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DD8E9B65-DF41-40CF-9995-5965585CF72E}"
 	ProjectSection(SolutionItems) = preProject
@@ -27,6 +27,14 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.DB.User.UserTwitter.AuthScope", "CK.DB.User.UserTwitter.AuthScope\CK.DB.User.UserTwitter.AuthScope.csproj", "{55449B0C-6005-4EB4-8543-58869A5E3AAD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.DB.User.UserTwitter.AuthScope.Tests", "Tests\CK.DB.User.UserTwitter.AuthScope.Tests\CK.DB.User.UserTwitter.AuthScope.Tests.csproj", "{3D45FE9D-6A4D-4DBB-8046-D43E34CE5BF7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.DB.User.UserTwitter.ScreenName", "CK.DB.User.UserTwitter.ScreenName\CK.DB.User.UserTwitter.ScreenName.csproj", "{982F2402-2631-4E52-A109-D1AD18EDC6ED}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.DB.User.UserTwitter.AccessToken", "CK.DB.User.UserTwitter.AccessToken\CK.DB.User.UserTwitter.AccessToken.csproj", "{1F668340-8D14-4652-8B6A-563590E80898}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.DB.User.UserTwitter.AccessToken.Tests", "Tests\CK.DB.User.UserTwitter.AccessToken.Tests\CK.DB.User.UserTwitter.AccessToken.Tests.csproj", "{9C42FE0F-80B0-4084-950E-F6DC75C2E8BF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.DB.User.UserTwitter.ScreenName.Tests", "Tests\CK.DB.User.UserTwitter.ScreenName.Tests\CK.DB.User.UserTwitter.ScreenName.Tests.csproj", "{AAF0D9B3-1FB6-4E97-9A8D-6266AEC88935}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,6 +62,22 @@ Global
 		{3D45FE9D-6A4D-4DBB-8046-D43E34CE5BF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D45FE9D-6A4D-4DBB-8046-D43E34CE5BF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D45FE9D-6A4D-4DBB-8046-D43E34CE5BF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{982F2402-2631-4E52-A109-D1AD18EDC6ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{982F2402-2631-4E52-A109-D1AD18EDC6ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{982F2402-2631-4E52-A109-D1AD18EDC6ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{982F2402-2631-4E52-A109-D1AD18EDC6ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F668340-8D14-4652-8B6A-563590E80898}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F668340-8D14-4652-8B6A-563590E80898}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F668340-8D14-4652-8B6A-563590E80898}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F668340-8D14-4652-8B6A-563590E80898}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C42FE0F-80B0-4084-950E-F6DC75C2E8BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C42FE0F-80B0-4084-950E-F6DC75C2E8BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C42FE0F-80B0-4084-950E-F6DC75C2E8BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C42FE0F-80B0-4084-950E-F6DC75C2E8BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAF0D9B3-1FB6-4E97-9A8D-6266AEC88935}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAF0D9B3-1FB6-4E97-9A8D-6266AEC88935}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAF0D9B3-1FB6-4E97-9A8D-6266AEC88935}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAF0D9B3-1FB6-4E97-9A8D-6266AEC88935}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,6 +85,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{252CE7CB-A1BB-416D-90CA-9EF8DFED3429} = {5E754B9E-84B8-426A-95B0-858D3EDCC19B}
 		{3D45FE9D-6A4D-4DBB-8046-D43E34CE5BF7} = {5E754B9E-84B8-426A-95B0-858D3EDCC19B}
+		{9C42FE0F-80B0-4084-950E-F6DC75C2E8BF} = {5E754B9E-84B8-426A-95B0-858D3EDCC19B}
+		{AAF0D9B3-1FB6-4E97-9A8D-6266AEC88935} = {5E754B9E-84B8-426A-95B0-858D3EDCC19B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5044F9DA-815D-48CE-A4EE-9FA49432D361}
