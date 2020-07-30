@@ -1,6 +1,6 @@
-<Project>
+﻿<Project>
   <PropertyGroup>
-    <CKDBVersion>9.0.2--0001-develop</CKDBVersion>
+    <CKDBVersion>0.0.0--02wtc6m-local+v9.0.1</CKDBVersion>
   </PropertyGroup>
   <!-- Exclude CKSetup-WorkingDir folder. -->
   <ItemGroup>
@@ -39,7 +39,7 @@
   <!--</BasicDefinitions>-->
   <!--<StandardProperties>-->
   <PropertyGroup>
-    <RepositoryUrl>https://github.com/signature-opensource/CK-DB-Twitter.git</RepositoryUrl>
+    <RepositoryUrl>https://github.com/signature-opensource/CK-DB-Twitter</RepositoryUrl>
     <ProductName>CK</ProductName>
     <Company>Signature Code</Company>
     <Authors>Signature Code</Authors>
