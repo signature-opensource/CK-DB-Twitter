@@ -1,0 +1,23 @@
+<Playlist Version="2.0">
+  <Rule Name="Includes" Match="Any">
+    <Rule Match="All">
+      <Property Name="Solution" />
+      <Rule Match="All">
+        <Property Name="Namespace" Value="DBSetup" />
+        <Rule Match="Any">
+          <Rule Match="All">
+            <Property Name="Class" Value="DBSetup" />
+            <Rule Match="Any">
+              <Rule Match="All">
+                <Property Name="TestWithNormalizedFullyQualifiedName" Value="DBSetup.DBSetup.backup_create" />
+                <Rule Match="Any">
+                  <Property Name="DisplayName" Value="backup_create" />
+                </Rule>
+              </Rule>
+            </Rule>
+          </Rule>
+        </Rule>
+      </Rule>
+    </Rule>
+  </Rule>
+</Playlist>
