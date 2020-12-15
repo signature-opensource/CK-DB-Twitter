@@ -9,7 +9,7 @@
     <PackageReference Include="CK.DB.Auth.AuthScope.Tests" Version="$(CKDBVersion)" />
     <ProjectReference Include="..\..\CK.DB.User.UserTwitter.AuthScope\CK.DB.User.UserTwitter.AuthScope.csproj" />
     <ProjectReference Include="..\CK.DB.User.UserTwitter.Tests\CK.DB.User.UserTwitter.Tests.csproj" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
     <PackageReference Include="NUnit" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
   </ItemGroup>
