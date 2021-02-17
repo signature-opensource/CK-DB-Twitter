@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <CKDBVersion>10.0.1</CKDBVersion>
+    <CKDBVersion>10.0.2--0003-develop</CKDBVersion>
   </PropertyGroup>
   <!-- Exclude CKSetup-WorkingDir folder. -->
   <ItemGroup>
