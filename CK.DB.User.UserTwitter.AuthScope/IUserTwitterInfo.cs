@@ -9,11 +9,11 @@ namespace CK.DB.User.UserTwitter.AuthScope
     public interface IUserTwitterInfo : UserTwitter.IUserTwitterInfo
     {
         /// <summary>
-        /// Gets the scope set identifier.
+        /// Gets or sets the scope set identifier.
         /// Note that the ScopeSetId is intrinsic: a new ScopeSetId is acquired 
         /// and set only when a new UserTwitter is created (by copy from 
         /// the default one - the ScopeSet of the UserTwitter 0).
         /// </summary>
-        int ScopeSetId { get; }
+        int ScopeSetId { get; set; }
     }
 }
