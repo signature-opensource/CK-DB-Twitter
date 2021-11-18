@@ -2,7 +2,7 @@
 <RepositoryInfo>
   <SimpleGitVersion OnlyPatch="true">
     <Branches>
-      <Branch Name="develop" CIVersionMode="LastReleaseBased" VersionName="develop" />
+      <Branch Name="develop-NetCore3" CIVersionMode="LastReleaseBased" VersionName="develop" />
     </Branches>
   </SimpleGitVersion>
 </RepositoryInfo>
