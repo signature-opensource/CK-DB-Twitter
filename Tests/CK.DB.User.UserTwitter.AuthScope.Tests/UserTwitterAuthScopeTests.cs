@@ -1,5 +1,5 @@
 using System;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Threading.Tasks;
 using CK.Core;
 using CK.DB.Actor;

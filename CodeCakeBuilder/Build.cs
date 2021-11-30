@@ -25,7 +25,7 @@ using Cake.Common.Tools.DotNetCore.Restore;
 using Cake.Common.Tools.DotNetCore.Build;
 using Cake.Common.Tools.DotNetCore.Pack;
 using Cake.Common.Build;
-using System.Data.SqlClient;
+
 using Cake.Common.Tools.NuGet.Install;
 using System.Net.Http;
 using Cake.Common.Net;
