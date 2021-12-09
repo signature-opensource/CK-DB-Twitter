@@ -1,4 +1,4 @@
-using Cake.Common;
+
 using Cake.Common.Solution;
 using Cake.Common.IO;
 using Cake.Common.Tools.MSBuild;
