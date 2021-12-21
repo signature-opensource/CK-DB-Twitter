@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <CKDBVersion>0.0.0--03m8fe6-local+v14.0.0-a</CKDBVersion>
+    <CKDBVersion>0.0.0--03n58ps-local+v14.0.0-r01</CKDBVersion>
   </PropertyGroup>
   <!-- Exclude CKSetup-WorkingDir folder. -->
   <ItemGroup>
@@ -82,7 +82,7 @@
     </ItemGroup>
   </Target>
   <!--</SourceLinkDebuggingWorkaround>-->
-  <!--<Analyzers>-->
+  <!--<Analyzers>: This analyzer provides very welcome guidelines about async and threading issues.-->
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.0.64" PrivateAssets="All" IncludeAssets="runtime;build;native;contentfiles;analyzers" />
   </ItemGroup>
