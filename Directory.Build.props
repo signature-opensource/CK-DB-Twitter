@@ -1,7 +1,4 @@
 <Project>
-  <PropertyGroup>
-    <CKDBVersion>14.0.0-r09</CKDBVersion>
-  </PropertyGroup>
   <!-- Exclude CKSetup-WorkingDir folder. -->
   <ItemGroup>
     <Compile Remove="CKSetup-WorkingDir\**" />
