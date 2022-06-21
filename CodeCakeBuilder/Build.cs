@@ -1,4 +1,4 @@
-using Cake.Common;
+
 using Cake.Common.Solution;
 using Cake.Common.IO;
 using Cake.Common.Tools.MSBuild;
@@ -25,7 +25,7 @@ using Cake.Common.Tools.DotNetCore.Restore;
 using Cake.Common.Tools.DotNetCore.Build;
 using Cake.Common.Tools.DotNetCore.Pack;
 using Cake.Common.Build;
-using System.Data.SqlClient;
+
 using Cake.Common.Tools.NuGet.Install;
 using System.Net.Http;
 using Cake.Common.Net;
@@ -38,7 +38,7 @@ namespace CodeCake
     /// Sample build "script".
     /// Build scripts can be decorated with AddPath attributes that inject existing paths into the PATH environment variable. 
     /// </summary>
-    [AddPath( "%UserProfile%/.nuget/packages/**/tools*" )]
+    
     public partial class Build : CodeCakeHost
     {
         public Build()
@@ -60,7 +60,7 @@ namespace CodeCake
                 .Does( () =>
                  {
                      globalInfo.GetDotnetSolution().Clean();
-                     Cake.CleanDirectories( globalInfo.ReleasesFolder );
+                     Cake.CleanDirectories( globalInfo.ReleasesFolder.ToString() );
                     
                  } );
 
@@ -93,9 +93,9 @@ namespace CodeCake
             Task( "Push-Artifacts" )
                 .IsDependentOn( "Create-NuGet-Packages" )
                 .WithCriteria( () => globalInfo.IsValid )
-                .Does( () =>
+                .Does( async () =>
                 {
-                    globalInfo.PushArtifacts();
+                   await globalInfo.PushArtifactsAsync();
                 } );
 
             // The Default task for this script can be set here.

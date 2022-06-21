@@ -1,12 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="..\Common\Shared.props" />
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Description>This package adds a ScopeSetId column to CK.tUserTwitter table.</Description>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CK.DB.Auth.AuthScope" Version="$(CKDBVersion)" />
+    <PackageReference Include="CK.DB.Auth.AuthScope" Version="14.0.0" />
     <ProjectReference Include="..\CK.DB.User.UserTwitter\CK.DB.User.UserTwitter.csproj" />
   </ItemGroup>
   <ItemGroup>
