@@ -5,7 +5,7 @@
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CK.DB.Auth.AuthScope" Version="17.0.2--0007-develop" />
+    <PackageReference Include="CK.DB.Auth.AuthScope" Version="17.1.0" />
     <ProjectReference Include="..\CK.DB.User.UserTwitter\CK.DB.User.UserTwitter.csproj" />
   </ItemGroup>
   <ItemGroup>
