@@ -7,7 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\CK.DB.User.UserTwitter.AccessToken\CK.DB.User.UserTwitter.AccessToken.csproj" />
     <ProjectReference Include="..\CK.DB.User.UserTwitter.Tests\CK.DB.User.UserTwitter.Tests.csproj" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
-    <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.3.1" />
   </ItemGroup>
 </Project>
