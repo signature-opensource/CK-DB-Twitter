@@ -5,7 +5,7 @@
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CK.DB.Auth" Version="19.2.0" />
+    <PackageReference Include="CK.DB.Auth" Version="19.2.1--0001-develop" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="**\*.sql;**\*.tql;**\*.y4" Exclude="bin\**;obj\**;@(EmbeddedResource)" />
