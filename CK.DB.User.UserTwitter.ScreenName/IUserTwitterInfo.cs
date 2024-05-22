@@ -10,7 +10,7 @@ namespace CK.DB.User.UserTwitter.ScreenName
         /// Gets or sets the scren name.
         /// Note that since 2017, this can be up to 50 characters.
         /// </summary>
-        string ScreenName { get; set; }
+        string? ScreenName { get; set; }
 
     }
 }
