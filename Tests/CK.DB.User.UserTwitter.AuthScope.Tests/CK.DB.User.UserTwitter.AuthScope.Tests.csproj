@@ -2,7 +2,8 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Description>This package contains tests for CK.DB.User.UserTwitter.AuthScope (uses CK.DB.Tests.NUnit).</Description>
-    <IsPackable>True</IsPackable>
+    <Nullable>enable</Nullable>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="CK.DB.Auth.AuthScope.Tests" Version="20.0.1--0025-develop" />

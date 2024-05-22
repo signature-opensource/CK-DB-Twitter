@@ -2,7 +2,8 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Description>This package contains tests for CK.DB.User.UserTwitter (uses CK.DB.Tests.NUnit).</Description>
-    <IsPackable>True</IsPackable>
+    <Nullable>enable</Nullable>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CK.DB.User.UserTwitter\CK.DB.User.UserTwitter.csproj" />

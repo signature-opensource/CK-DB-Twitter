@@ -18,10 +18,11 @@ namespace CK.DB.User.UserTwitter.AuthScope.Tests
     {
 
         [Test]
-        public async Task non_user_Twitter_ScopeSet_is_null()
+        public async Task non_user_Twitter_ScopeSet_is_null_Async()
         {
             var user = TestHelper.StObjMap.StObjs.Obtain<UserTable>();
             var p = TestHelper.StObjMap.StObjs.Obtain<Package>();
+            Throw.DebugAssert( user != null && p != null );
             using( var ctx = new SqlStandardCallContext() )
             {
                 var id = await user.CreateUserAsync( ctx, 1, Guid.NewGuid().ToString() );
@@ -30,11 +31,12 @@ namespace CK.DB.User.UserTwitter.AuthScope.Tests
         }
 
         [Test]
-        public async Task setting_default_scopes_impact_new_users()
+        public async Task setting_default_scopes_impact_new_users_Async()
         {
             var user = TestHelper.StObjMap.StObjs.Obtain<UserTable>();
             var p = TestHelper.StObjMap.StObjs.Obtain<Package>();
             var factory = TestHelper.StObjMap.StObjs.Obtain<IPocoFactory<IUserTwitterInfo>>();
+            Throw.DebugAssert( user != null && p != null && factory != null );
             using( var ctx = new SqlStandardCallContext() )
             {
                 AuthScopeSet original = await p.ReadDefaultScopeSetAsync( ctx );
@@ -48,6 +50,7 @@ namespace CK.DB.User.UserTwitter.AuthScope.Tests
                     userInfo.TwitterAccountId = Guid.NewGuid().ToString();
                     await p.UserTwitterTable.CreateOrUpdateTwitterUserAsync( ctx, 1, id, userInfo );
                     var info = await p.UserTwitterTable.FindKnownUserInfoAsync( ctx, userInfo.TwitterAccountId );
+                    Throw.DebugAssert( info != null );
                     AuthScopeSet userSet = await p.ReadScopeSetAsync( ctx, info.UserId );
                     userSet.ToString().Should().Be( original.ToString() );
                 }
@@ -65,10 +68,11 @@ namespace CK.DB.User.UserTwitter.AuthScope.Tests
 
                 {
                     int id = await user.CreateUserAsync( ctx, 1, Guid.NewGuid().ToString() );
-                    IUserTwitterInfo userInfo = p.UserTwitterTable.CreateUserInfo<IUserTwitterInfo>();
+                    IUserTwitterInfo? userInfo = p.UserTwitterTable.CreateUserInfo<IUserTwitterInfo>();
                     userInfo.TwitterAccountId = Guid.NewGuid().ToString();
                     await p.UserTwitterTable.CreateOrUpdateTwitterUserAsync( ctx, 1, id, userInfo, UCLMode.CreateOnly | UCLMode.UpdateOnly );
-                    userInfo = (IUserTwitterInfo)(await p.UserTwitterTable.FindKnownUserInfoAsync( ctx, userInfo.TwitterAccountId )).Info;
+                    userInfo = (IUserTwitterInfo?)(await p.UserTwitterTable.FindKnownUserInfoAsync( ctx, userInfo.TwitterAccountId ))?.Info;
+                    Throw.DebugAssert( userInfo != null );
                     AuthScopeSet userSet = await p.ReadScopeSetAsync( ctx, id );
                     userSet.ToString().Should().Contain( "[W]thing" )
                                                .And.Contain( "[W]other" )

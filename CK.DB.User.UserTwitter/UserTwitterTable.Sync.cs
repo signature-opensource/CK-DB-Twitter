@@ -57,7 +57,7 @@ namespace CK.DB.User.UserTwitter
         /// <param name="ctx">The call context to use.</param>
         /// <param name="twitterAccountId">The Twitter account identifier.</param>
         /// <returns>A <see cref="IdentifiedUserInfo{T}"/> or null if not found.</returns>
-        public IdentifiedUserInfo<IUserTwitterInfo> FindKnownUserInfo( ISqlCallContext ctx, string twitterAccountId )
+        public IdentifiedUserInfo<IUserTwitterInfo>? FindKnownUserInfo( ISqlCallContext ctx, string twitterAccountId )
         {
             using( var c = CreateReaderCommand( twitterAccountId ) )
             {
