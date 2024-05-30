@@ -6,7 +6,7 @@
     <IsPackable>true</IsPackable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CK.DB.Auth.AuthScope.Tests" Version="20.0.1--0033-develop" />
+    <PackageReference Include="CK.DB.Auth.AuthScope.Tests" Version="20.0.1--0034-develop" />
     <ProjectReference Include="..\..\CK.DB.User.UserTwitter.AuthScope\CK.DB.User.UserTwitter.AuthScope.csproj" />
     <ProjectReference Include="..\CK.DB.User.UserTwitter.Tests\CK.DB.User.UserTwitter.Tests.csproj" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
