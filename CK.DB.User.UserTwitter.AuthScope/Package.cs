@@ -4,6 +4,7 @@ using CK.SqlServer;
 using CK.Core;
 using System;
 using System.Threading.Tasks;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CK.DB.User.UserTwitter.AuthScope
 {
@@ -15,19 +16,21 @@ namespace CK.DB.User.UserTwitter.AuthScope
     [SqlObjectItem( "transform:sUserTwitterUCL, transform:sUserTwitterDestroy" )]
     public class Package : SqlPackage
     {
+        [AllowNull]
         AuthScopeSetTable _scopeSetTable;
-        UserTwitterTable _TwitterTable;
+        [AllowNull]
+        UserTwitterTable _twitterTable;
 
         void StObjConstruct( AuthScopeSetTable scopeSetTable, UserTwitterTable TwitterTable )
         {
             _scopeSetTable = scopeSetTable;
-            _TwitterTable = TwitterTable;
+            _twitterTable = TwitterTable;
         }
 
         /// <summary>
         /// Gets the <see cref="UserTwitterTable"/>.
         /// </summary>
-        public UserTwitterTable UserTwitterTable => _TwitterTable;
+        public UserTwitterTable UserTwitterTable => _twitterTable;
 
         /// <summary>
         /// Gets the <see cref="AuthScopeSetTable"/>.
@@ -42,7 +45,7 @@ namespace CK.DB.User.UserTwitter.AuthScope
         /// <returns>The scope set or null if the user is not a Twitter user.</returns>
         public Task<AuthScopeSet> ReadScopeSetAsync( ISqlCallContext ctx, int userId )
         {
-            if( userId <= 0 ) throw new ArgumentException( nameof( userId ) );
+            Throw.CheckArgument( userId > 0 );
             var cmd = _scopeSetTable.CreateReadCommand( $"select ScopeSetId from CK.tUserTwitter where UserId = {userId}" );
             return _scopeSetTable.RawReadAuthScopeSetAsync( ctx, cmd );
         }

@@ -17,12 +17,12 @@ namespace CK.DB.User.UserTwitter.AccessToken
         /// <summary>
         /// Gets or sets the access token.
         /// </summary>
-        string AccessToken { get; set; }
+        string? AccessToken { get; set; }
 
         /// <summary>
         /// Gets or sets the access token secret.
         /// </summary>
-        string AccessTokenSecret { get; set; }
+        string? AccessTokenSecret { get; set; }
     }
 
     /// <summary>

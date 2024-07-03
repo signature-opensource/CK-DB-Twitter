@@ -16,6 +16,7 @@ namespace CK.DB.User.UserTwitter.ScreenName.Tests
         {
             var u = TestHelper.StObjMap.StObjs.Obtain<UserTwitterTable>();
             var user = TestHelper.StObjMap.StObjs.Obtain<UserTable>();
+            Throw.DebugAssert( user != null && u != null );
             using( var ctx = new SqlStandardCallContext() )
             {
                 var twitterAccountId = Guid.NewGuid().ToString( "N" );
@@ -31,7 +32,8 @@ namespace CK.DB.User.UserTwitter.ScreenName.Tests
                 u.CreateOrUpdateTwitterUser( ctx, 1, idU, info );
                 u.Database.ExecuteScalar( rawSelect ).Should().Be( "Albert" );
 
-                info = (ScreenName.IUserTwitterInfo)u.FindKnownUserInfo( ctx, twitterAccountId ).Info;
+                info = (IUserTwitterInfo?)u.FindKnownUserInfo( ctx, twitterAccountId )?.Info;
+                Throw.DebugAssert( info != null );
                 info.ScreenName.Should().Be( "Albert" );
                 info.TwitterAccountId.Should().Be( twitterAccountId );
             }

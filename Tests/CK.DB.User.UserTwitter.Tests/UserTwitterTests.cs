@@ -22,6 +22,7 @@ namespace CK.DB.User.UserTwitter.Tests
             var u = TestHelper.StObjMap.StObjs.Obtain<UserTwitterTable>();
             var user = TestHelper.StObjMap.StObjs.Obtain<UserTable>();
             var infoFactory = TestHelper.StObjMap.StObjs.Obtain<IPocoFactory<IUserTwitterInfo>>();
+            Throw.DebugAssert( user != null && u != null && infoFactory != null );
             using( var ctx = new SqlStandardCallContext() )
             {
                 var userName = Guid.NewGuid().ToString();
@@ -33,7 +34,7 @@ namespace CK.DB.User.UserTwitter.Tests
                 var created = u.CreateOrUpdateTwitterUser( ctx, 1, userId, info );
                 created.OperationResult.Should().Be( UCResult.Created );
                 var info2 = u.FindKnownUserInfo( ctx, twitterAccountId );
-
+                Throw.DebugAssert( info2 != null );
                 info2.UserId.Should().Be( userId );
                 info2.Info.TwitterAccountId.Should().Be( twitterAccountId );
 
@@ -44,11 +45,12 @@ namespace CK.DB.User.UserTwitter.Tests
         }
 
         [Test]
-        public async Task create_Twitter_user_and_check_read_info_object_method_async()
+        public async Task create_Twitter_user_and_check_read_info_object_method_Async()
         {
             var u = TestHelper.StObjMap.StObjs.Obtain<UserTwitterTable>();
             var user = TestHelper.StObjMap.StObjs.Obtain<UserTable>();
             var infoFactory = TestHelper.StObjMap.StObjs.Obtain<IPocoFactory<IUserTwitterInfo>>();
+            Throw.DebugAssert( user != null && u != null && infoFactory != null );
             using( var ctx = new SqlStandardCallContext() )
             {
                 var userName = Guid.NewGuid().ToString();
@@ -60,7 +62,7 @@ namespace CK.DB.User.UserTwitter.Tests
                 var created = await u.CreateOrUpdateTwitterUserAsync( ctx, 1, userId, info );
                 created.OperationResult.Should().Be( UCResult.Created );
                 var info2 = await u.FindKnownUserInfoAsync( ctx, TwitterAccountId );
-
+                Throw.DebugAssert( info2 != null );
                 info2.UserId.Should().Be( userId );
                 info2.Info.TwitterAccountId.Should().Be( TwitterAccountId );
 
@@ -81,12 +83,14 @@ namespace CK.DB.User.UserTwitter.Tests
         {
             var u = TestHelper.StObjMap.StObjs.Obtain<UserTwitterTable>();
             var user = TestHelper.StObjMap.StObjs.Obtain<UserTable>();
+            Throw.DebugAssert( user != null && u != null );
+
             using( var ctx = new SqlStandardCallContext() )
             {
                 string userName = "Twitter auth - " + Guid.NewGuid().ToString();
                 var TwitterAccountId = Guid.NewGuid().ToString( "N" );
                 var idU = user.CreateUser( ctx, 1, userName );
-                u.Database.ExecuteReader( $"select * from CK.vUserAuthProvider where UserId={idU} and Scheme='Twitter'" )
+                u.Database.ExecuteReader( $"select * from CK.vUserAuthProvider where UserId={idU} and Scheme='Twitter'" )!
                     .Rows.Should().BeEmpty();
                 var info = u.CreateUserInfo<IUserTwitterInfo>();
                 info.TwitterAccountId = TwitterAccountId;
@@ -94,7 +98,7 @@ namespace CK.DB.User.UserTwitter.Tests
                 u.Database.ExecuteScalar( $"select count(*) from CK.vUserAuthProvider where UserId={idU} and Scheme='Twitter'" )
                     .Should().Be( 1 );
                 u.DestroyTwitterUser( ctx, 1, idU );
-                u.Database.ExecuteReader( $"select * from CK.vUserAuthProvider where UserId={idU} and Scheme='Twitter'" )
+                u.Database.ExecuteReader( $"select * from CK.vUserAuthProvider where UserId={idU} and Scheme='Twitter'" )!
                     .Rows.Should().BeEmpty();
             }
         }
@@ -105,6 +109,8 @@ namespace CK.DB.User.UserTwitter.Tests
             var auth = TestHelper.StObjMap.StObjs.Obtain<Auth.Package>();
             // With IUserTwitterInfo POCO.
             var f = TestHelper.StObjMap.StObjs.Obtain<IPocoFactory<IUserTwitterInfo>>();
+            Throw.DebugAssert( auth != null && f != null );
+
             CK.DB.Auth.Tests.AuthTests.StandardTestForGenericAuthenticationProvider(
                 auth,
                 "Twitter",
@@ -136,6 +142,7 @@ namespace CK.DB.User.UserTwitter.Tests
         {
             var auth = TestHelper.StObjMap.StObjs.Obtain<Auth.Package>();
             var f = TestHelper.StObjMap.StObjs.Obtain<IPocoFactory<IUserTwitterInfo>>();
+            Throw.DebugAssert( auth != null && f != null );
             await Auth.Tests.AuthTests.StandardTestForGenericAuthenticationProviderAsync(
                 auth,
                 "Twitter",

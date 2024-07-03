@@ -17,6 +17,7 @@ namespace CK.DB.User.UserTwitter.AccessToken.Tests
         {
             var twitter = TestHelper.StObjMap.StObjs.Obtain<UserTwitterTable>();
             var user = TestHelper.StObjMap.StObjs.Obtain<UserTable>();
+            Throw.DebugAssert( user != null && twitter != null );
             using( var ctx = new SqlStandardCallContext() )
             {
                 string userName = "Test Twitter AccessToken - " + Guid.NewGuid().ToString();
@@ -37,7 +38,8 @@ namespace CK.DB.User.UserTwitter.AccessToken.Tests
                 twitter.Database.ExecuteScalar( rawSelect )
                     .Should().Be( "an access token...and its secret..." );
 
-                info = (IUserTwitterInfo)twitter.FindKnownUserInfo( ctx, twitterAccountId ).Info;
+                info = (IUserTwitterInfo?)twitter.FindKnownUserInfo( ctx, twitterAccountId )?.Info;
+                Throw.DebugAssert( info != null );
                 info.LastWriteTime.Should().BeAfter( DateTime.UtcNow.AddMonths( -1 ) );
                 info.AccessToken.Should().Be( "an access token" );
                 info.AccessTokenSecret.Should().Be( "...and its secret..." );
@@ -47,7 +49,8 @@ namespace CK.DB.User.UserTwitter.AccessToken.Tests
                 info.AccessToken = null;
                 info.AccessTokenSecret = null;
                 twitter.CreateOrUpdateTwitterUser( ctx, 1, idU, info );
-                info = (IUserTwitterInfo)twitter.FindKnownUserInfo( ctx, twitterAccountId ).Info;
+                info = (IUserTwitterInfo?)twitter.FindKnownUserInfo( ctx, twitterAccountId )?.Info;
+                Throw.DebugAssert( info != null );
                 info.LastWriteTime.Should().Be( lastUpdate );
                 info.AccessToken.Should().Be( "an access token" );
                 info.AccessTokenSecret.Should().Be( "...and its secret..." );
@@ -60,6 +63,7 @@ namespace CK.DB.User.UserTwitter.AccessToken.Tests
             var twitter = TestHelper.StObjMap.StObjs.Obtain<UserTwitterTable>();
             var tokens = TestHelper.StObjMap.StObjs.Obtain<Package>();
             var user = TestHelper.StObjMap.StObjs.Obtain<UserTable>();
+            Throw.DebugAssert( twitter != null && tokens != null && user != null );
             using( var ctx = new SqlStandardCallContext() )
             {
                 string userName = "Test Twitter <NoStorage> " + Guid.NewGuid().ToString();

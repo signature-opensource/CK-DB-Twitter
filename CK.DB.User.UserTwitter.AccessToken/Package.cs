@@ -11,11 +11,8 @@ namespace CK.DB.User.UserTwitter.AccessToken
     [SqlObjectItem( "transform:CK.sUserTwitterUCL" )]
     public abstract class Package : SqlPackage
     {
-        UserTwitter.UserTwitterTable _table;
-
         void StObjConstruct( UserTwitter.UserTwitterTable table )
         {
-            _table = table;
         }
 
         /// <summary>

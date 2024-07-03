@@ -13,12 +13,5 @@ namespace CK.DB.User.UserTwitter
         void StObjConstruct( Actor.Package actorPackage, Auth.Package authPackage )
         {
         }
-
-        /// <summary>
-        /// Gets the user Twitter table.
-        /// </summary>
-        [InjectObject]
-        public UserTwitterTable UserTwitterTable { get; protected set; }
-
     }
 }

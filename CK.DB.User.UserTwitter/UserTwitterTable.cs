@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using CK.DB.Auth;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CK.DB.User.UserTwitter
 {
@@ -17,6 +18,7 @@ namespace CK.DB.User.UserTwitter
     [SqlObjectItem( "transform:sUserDestroy" )]
     public abstract partial class UserTwitterTable : SqlTable, IGenericAuthenticationProvider<IUserTwitterInfo>
     {
+        [AllowNull]
         IPocoFactory<IUserTwitterInfo> _infoFactory;
 
         /// <summary>
@@ -24,12 +26,16 @@ namespace CK.DB.User.UserTwitter
         /// </summary>
         public string ProviderName => "Twitter";
 
+        public bool CanCreatePayload => true;
+
+        object IGenericAuthenticationProvider.CreatePayload() => _infoFactory.Create();
+
+        IUserTwitterInfo IGenericAuthenticationProvider<IUserTwitterInfo>.CreatePayload() => _infoFactory.Create();
+
         void StObjConstruct( IPocoFactory<IUserTwitterInfo> infoFactory )
         {
             _infoFactory = infoFactory;
         }
-
-        IUserTwitterInfo IGenericAuthenticationProvider<IUserTwitterInfo>.CreatePayload() => _infoFactory.Create();
 
         /// <summary>
         /// Creates a <see cref="IUserTwitterInfo"/> poco.
@@ -49,7 +55,7 @@ namespace CK.DB.User.UserTwitter
         /// <param name="mode">Optionnaly configures Create, Update only or WithLogin behavior.</param>
         /// <param name="cancellationToken">Optional cancellation token.</param>
         /// <returns>The result.</returns>
-        public async Task<UCLResult> CreateOrUpdateTwitterUserAsync( ISqlCallContext ctx, int actorId, int userId, IUserTwitterInfo info, UCLMode mode = UCLMode.CreateOrUpdate, CancellationToken cancellationToken = default( CancellationToken ) )
+        public async Task<UCLResult> CreateOrUpdateTwitterUserAsync( ISqlCallContext ctx, int actorId, int userId, IUserTwitterInfo info, UCLMode mode = UCLMode.CreateOrUpdate, CancellationToken cancellationToken = default )
         {
             var r = await TwitterUserUCLAsync( ctx, actorId, userId, info, mode, cancellationToken ).ConfigureAwait( false );
             return r;
@@ -65,7 +71,7 @@ namespace CK.DB.User.UserTwitter
         /// <param name="actualLogin">Set it to false to avoid login side-effect (such as updating the LastLoginTime) on success.</param>
         /// <param name="cancellationToken">Optional cancellation token.</param>
         /// <returns>The <see cref="LoginResult"/>.</returns>
-        public async Task<LoginResult> LoginUserAsync( ISqlCallContext ctx, IUserTwitterInfo info, bool actualLogin = true, CancellationToken cancellationToken = default( CancellationToken ) )
+        public async Task<LoginResult> LoginUserAsync( ISqlCallContext ctx, IUserTwitterInfo info, bool actualLogin = true, CancellationToken cancellationToken = default )
         {
             var mode = actualLogin
                         ? UCLMode.UpdateOnly | UCLMode.WithActualLogin
@@ -83,7 +89,7 @@ namespace CK.DB.User.UserTwitter
         /// <param name="cancellationToken">Optional cancellation token.</param>
         /// <returns>The awaitable.</returns>
         [SqlProcedure( "sUserTwitterDestroy" )]
-        public abstract Task DestroyTwitterUserAsync( ISqlCallContext ctx, int actorId, int userId, CancellationToken cancellationToken = default( CancellationToken ) );
+        public abstract Task DestroyTwitterUserAsync( ISqlCallContext ctx, int actorId, int userId, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Raw call to manage TwitterUser. Since this should not be used directly, it is protected.
@@ -201,12 +207,12 @@ namespace CK.DB.User.UserTwitter
             return LoginUserAsync( ctx, info, actualLogin, cancellationToken );
         }
 
-        void IGenericAuthenticationProvider.DestroyUser( ISqlCallContext ctx, int actorId, int userId, string schemeSuffix )
+        void IGenericAuthenticationProvider.DestroyUser( ISqlCallContext ctx, int actorId, int userId, string? schemeSuffix )
         {
             DestroyTwitterUser( ctx, actorId, userId );
         }
 
-        Task IGenericAuthenticationProvider.DestroyUserAsync( ISqlCallContext ctx, int actorId, int userId, string schemeSuffix, CancellationToken cancellationToken )
+        Task IGenericAuthenticationProvider.DestroyUserAsync( ISqlCallContext ctx, int actorId, int userId, string? schemeSuffix, CancellationToken cancellationToken )
         {
             return DestroyTwitterUserAsync( ctx, actorId, userId, cancellationToken );
         }
