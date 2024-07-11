@@ -1,14 +1,13 @@
-using System;
-using Microsoft.Data.SqlClient;
-using System.Threading.Tasks;
 using CK.Core;
 using CK.DB.Actor;
-using CK.SqlServer;
-using NUnit.Framework;
-using System.Linq;
 using CK.DB.Auth;
-using System.Collections.Generic;
+using CK.SqlServer;
+using CK.Testing;
 using FluentAssertions;
+using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using static CK.Testing.MonitorTestHelper;
 
 namespace CK.DB.User.UserTwitter.Tests
@@ -23,7 +22,7 @@ namespace CK.DB.User.UserTwitter.Tests
             var user = SharedEngine.Map.StObjs.Obtain<UserTable>();
             var infoFactory = SharedEngine.Map.StObjs.Obtain<IPocoFactory<IUserTwitterInfo>>();
             Throw.DebugAssert( user != null && u != null && infoFactory != null );
-            using( var ctx = new SqlStandardCallContext() )
+            using( var ctx = new SqlStandardCallContext( TestHelper.Monitor ) )
             {
                 var userName = Guid.NewGuid().ToString();
                 int userId = user.CreateUser( ctx, 1, userName );
@@ -51,7 +50,7 @@ namespace CK.DB.User.UserTwitter.Tests
             var user = SharedEngine.Map.StObjs.Obtain<UserTable>();
             var infoFactory = SharedEngine.Map.StObjs.Obtain<IPocoFactory<IUserTwitterInfo>>();
             Throw.DebugAssert( user != null && u != null && infoFactory != null );
-            using( var ctx = new SqlStandardCallContext() )
+            using( var ctx = new SqlStandardCallContext( TestHelper.Monitor ) )
             {
                 var userName = Guid.NewGuid().ToString();
                 int userId = await user.CreateUserAsync( ctx, 1, userName );
@@ -85,7 +84,7 @@ namespace CK.DB.User.UserTwitter.Tests
             var user = SharedEngine.Map.StObjs.Obtain<UserTable>();
             Throw.DebugAssert( user != null && u != null );
 
-            using( var ctx = new SqlStandardCallContext() )
+            using( var ctx = new SqlStandardCallContext( TestHelper.Monitor ) )
             {
                 string userName = "Twitter auth - " + Guid.NewGuid().ToString();
                 var TwitterAccountId = Guid.NewGuid().ToString( "N" );

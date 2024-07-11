@@ -1,6 +1,7 @@
 using CK.Core;
 using CK.DB.Actor;
 using CK.SqlServer;
+using CK.Testing;
 using FluentAssertions;
 using NUnit.Framework;
 using System;
@@ -18,7 +19,7 @@ namespace CK.DB.User.UserTwitter.AccessToken.Tests
             var twitter = SharedEngine.Map.StObjs.Obtain<UserTwitterTable>();
             var user = SharedEngine.Map.StObjs.Obtain<UserTable>();
             Throw.DebugAssert( user != null && twitter != null );
-            using( var ctx = new SqlStandardCallContext() )
+            using( var ctx = new SqlStandardCallContext( TestHelper.Monitor ) )
             {
                 string userName = "Test Twitter AccessToken - " + Guid.NewGuid().ToString();
                 var twitterAccountId = Guid.NewGuid().ToString( "N" );
@@ -64,7 +65,7 @@ namespace CK.DB.User.UserTwitter.AccessToken.Tests
             var tokens = SharedEngine.Map.StObjs.Obtain<Package>();
             var user = SharedEngine.Map.StObjs.Obtain<UserTable>();
             Throw.DebugAssert( twitter != null && tokens != null && user != null );
-            using( var ctx = new SqlStandardCallContext() )
+            using( var ctx = new SqlStandardCallContext( TestHelper.Monitor ) )
             {
                 string userName = "Test Twitter <NoStorage> " + Guid.NewGuid().ToString();
                 var twitterAccountId = Guid.NewGuid().ToString( "N" );

@@ -1,14 +1,13 @@
-using System;
-using Microsoft.Data.SqlClient;
-using System.Threading.Tasks;
 using CK.Core;
 using CK.DB.Actor;
-using CK.SqlServer;
-using NUnit.Framework;
-using System.Linq;
 using CK.DB.Auth;
 using CK.DB.Auth.AuthScope;
+using CK.SqlServer;
+using CK.Testing;
 using FluentAssertions;
+using NUnit.Framework;
+using System;
+using System.Threading.Tasks;
 using static CK.Testing.MonitorTestHelper;
 
 namespace CK.DB.User.UserTwitter.AuthScope.Tests
@@ -23,7 +22,7 @@ namespace CK.DB.User.UserTwitter.AuthScope.Tests
             var user = SharedEngine.Map.StObjs.Obtain<UserTable>();
             var p = SharedEngine.Map.StObjs.Obtain<Package>();
             Throw.DebugAssert( user != null && p != null );
-            using( var ctx = new SqlStandardCallContext() )
+            using( var ctx = new SqlStandardCallContext( TestHelper.Monitor ) )
             {
                 var id = await user.CreateUserAsync( ctx, 1, Guid.NewGuid().ToString() );
                 (await p.ReadScopeSetAsync( ctx, id )).Should().BeNull();
@@ -37,7 +36,7 @@ namespace CK.DB.User.UserTwitter.AuthScope.Tests
             var p = SharedEngine.Map.StObjs.Obtain<Package>();
             var factory = SharedEngine.Map.StObjs.Obtain<IPocoFactory<IUserTwitterInfo>>();
             Throw.DebugAssert( user != null && p != null && factory != null );
-            using( var ctx = new SqlStandardCallContext() )
+            using( var ctx = new SqlStandardCallContext( TestHelper.Monitor ) )
             {
                 AuthScopeSet original = await p.ReadDefaultScopeSetAsync( ctx );
                 original.Contains( "nimp" ).Should().BeFalse();
