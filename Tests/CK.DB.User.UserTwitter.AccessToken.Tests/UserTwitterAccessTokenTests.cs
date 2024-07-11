@@ -5,7 +5,7 @@ using FluentAssertions;
 using NUnit.Framework;
 using System;
 using System.Threading;
-using static CK.Testing.DBSetupTestHelper;
+using static CK.Testing.MonitorTestHelper;
 
 namespace CK.DB.User.UserTwitter.AccessToken.Tests
 {
@@ -15,8 +15,8 @@ namespace CK.DB.User.UserTwitter.AccessToken.Tests
         [Test]
         public void AccessToken_and_Secret_track_the_LastWriteTime()
         {
-            var twitter = TestHelper.StObjMap.StObjs.Obtain<UserTwitterTable>();
-            var user = TestHelper.StObjMap.StObjs.Obtain<UserTable>();
+            var twitter = SharedEngine.Map.StObjs.Obtain<UserTwitterTable>();
+            var user = SharedEngine.Map.StObjs.Obtain<UserTable>();
             Throw.DebugAssert( user != null && twitter != null );
             using( var ctx = new SqlStandardCallContext() )
             {
@@ -60,9 +60,9 @@ namespace CK.DB.User.UserTwitter.AccessToken.Tests
         [Test]
         public void AllowTokenStorage_disables_updates_of_tokens()
         {
-            var twitter = TestHelper.StObjMap.StObjs.Obtain<UserTwitterTable>();
-            var tokens = TestHelper.StObjMap.StObjs.Obtain<Package>();
-            var user = TestHelper.StObjMap.StObjs.Obtain<UserTable>();
+            var twitter = SharedEngine.Map.StObjs.Obtain<UserTwitterTable>();
+            var tokens = SharedEngine.Map.StObjs.Obtain<Package>();
+            var user = SharedEngine.Map.StObjs.Obtain<UserTable>();
             Throw.DebugAssert( twitter != null && tokens != null && user != null );
             using( var ctx = new SqlStandardCallContext() )
             {

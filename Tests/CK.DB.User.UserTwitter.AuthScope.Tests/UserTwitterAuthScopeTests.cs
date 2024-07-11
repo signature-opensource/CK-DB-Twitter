@@ -9,7 +9,7 @@ using System.Linq;
 using CK.DB.Auth;
 using CK.DB.Auth.AuthScope;
 using FluentAssertions;
-using static CK.Testing.DBSetupTestHelper;
+using static CK.Testing.MonitorTestHelper;
 
 namespace CK.DB.User.UserTwitter.AuthScope.Tests
 {
@@ -20,8 +20,8 @@ namespace CK.DB.User.UserTwitter.AuthScope.Tests
         [Test]
         public async Task non_user_Twitter_ScopeSet_is_null_Async()
         {
-            var user = TestHelper.StObjMap.StObjs.Obtain<UserTable>();
-            var p = TestHelper.StObjMap.StObjs.Obtain<Package>();
+            var user = SharedEngine.Map.StObjs.Obtain<UserTable>();
+            var p = SharedEngine.Map.StObjs.Obtain<Package>();
             Throw.DebugAssert( user != null && p != null );
             using( var ctx = new SqlStandardCallContext() )
             {
@@ -33,9 +33,9 @@ namespace CK.DB.User.UserTwitter.AuthScope.Tests
         [Test]
         public async Task setting_default_scopes_impact_new_users_Async()
         {
-            var user = TestHelper.StObjMap.StObjs.Obtain<UserTable>();
-            var p = TestHelper.StObjMap.StObjs.Obtain<Package>();
-            var factory = TestHelper.StObjMap.StObjs.Obtain<IPocoFactory<IUserTwitterInfo>>();
+            var user = SharedEngine.Map.StObjs.Obtain<UserTable>();
+            var p = SharedEngine.Map.StObjs.Obtain<Package>();
+            var factory = SharedEngine.Map.StObjs.Obtain<IPocoFactory<IUserTwitterInfo>>();
             Throw.DebugAssert( user != null && p != null && factory != null );
             using( var ctx = new SqlStandardCallContext() )
             {

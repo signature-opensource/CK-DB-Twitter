@@ -4,7 +4,7 @@ using CK.SqlServer;
 using FluentAssertions;
 using NUnit.Framework;
 using System;
-using static CK.Testing.DBSetupTestHelper;
+using static CK.Testing.MonitorTestHelper;
 
 namespace CK.DB.User.UserTwitter.ScreenName.Tests
 {
@@ -14,8 +14,8 @@ namespace CK.DB.User.UserTwitter.ScreenName.Tests
         [Test]
         public void screenName_is_handled_like_any_other_Authentication_Provider_property()
         {
-            var u = TestHelper.StObjMap.StObjs.Obtain<UserTwitterTable>();
-            var user = TestHelper.StObjMap.StObjs.Obtain<UserTable>();
+            var u = SharedEngine.Map.StObjs.Obtain<UserTwitterTable>();
+            var user = SharedEngine.Map.StObjs.Obtain<UserTable>();
             Throw.DebugAssert( user != null && u != null );
             using( var ctx = new SqlStandardCallContext() )
             {

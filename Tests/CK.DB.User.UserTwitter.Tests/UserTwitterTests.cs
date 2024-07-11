@@ -9,7 +9,7 @@ using System.Linq;
 using CK.DB.Auth;
 using System.Collections.Generic;
 using FluentAssertions;
-using static CK.Testing.DBSetupTestHelper;
+using static CK.Testing.MonitorTestHelper;
 
 namespace CK.DB.User.UserTwitter.Tests
 {
@@ -19,9 +19,9 @@ namespace CK.DB.User.UserTwitter.Tests
         [Test]
         public void create_Twitter_user_and_check_read_info_object_method()
         {
-            var u = TestHelper.StObjMap.StObjs.Obtain<UserTwitterTable>();
-            var user = TestHelper.StObjMap.StObjs.Obtain<UserTable>();
-            var infoFactory = TestHelper.StObjMap.StObjs.Obtain<IPocoFactory<IUserTwitterInfo>>();
+            var u = SharedEngine.Map.StObjs.Obtain<UserTwitterTable>();
+            var user = SharedEngine.Map.StObjs.Obtain<UserTable>();
+            var infoFactory = SharedEngine.Map.StObjs.Obtain<IPocoFactory<IUserTwitterInfo>>();
             Throw.DebugAssert( user != null && u != null && infoFactory != null );
             using( var ctx = new SqlStandardCallContext() )
             {
@@ -47,9 +47,9 @@ namespace CK.DB.User.UserTwitter.Tests
         [Test]
         public async Task create_Twitter_user_and_check_read_info_object_method_Async()
         {
-            var u = TestHelper.StObjMap.StObjs.Obtain<UserTwitterTable>();
-            var user = TestHelper.StObjMap.StObjs.Obtain<UserTable>();
-            var infoFactory = TestHelper.StObjMap.StObjs.Obtain<IPocoFactory<IUserTwitterInfo>>();
+            var u = SharedEngine.Map.StObjs.Obtain<UserTwitterTable>();
+            var user = SharedEngine.Map.StObjs.Obtain<UserTable>();
+            var infoFactory = SharedEngine.Map.StObjs.Obtain<IPocoFactory<IUserTwitterInfo>>();
             Throw.DebugAssert( user != null && u != null && infoFactory != null );
             using( var ctx = new SqlStandardCallContext() )
             {
@@ -81,8 +81,8 @@ namespace CK.DB.User.UserTwitter.Tests
         [Test]
         public void vUserAuthProvider_reflects_the_user_Twitter_authentication()
         {
-            var u = TestHelper.StObjMap.StObjs.Obtain<UserTwitterTable>();
-            var user = TestHelper.StObjMap.StObjs.Obtain<UserTable>();
+            var u = SharedEngine.Map.StObjs.Obtain<UserTwitterTable>();
+            var user = SharedEngine.Map.StObjs.Obtain<UserTable>();
             Throw.DebugAssert( user != null && u != null );
 
             using( var ctx = new SqlStandardCallContext() )
@@ -106,9 +106,9 @@ namespace CK.DB.User.UserTwitter.Tests
         [Test]
         public void standard_generic_tests_for_Twitter_provider()
         {
-            var auth = TestHelper.StObjMap.StObjs.Obtain<Auth.Package>();
+            var auth = SharedEngine.Map.StObjs.Obtain<Auth.Package>();
             // With IUserTwitterInfo POCO.
-            var f = TestHelper.StObjMap.StObjs.Obtain<IPocoFactory<IUserTwitterInfo>>();
+            var f = SharedEngine.Map.StObjs.Obtain<IPocoFactory<IUserTwitterInfo>>();
             Throw.DebugAssert( auth != null && f != null );
 
             CK.DB.Auth.Tests.AuthTests.StandardTestForGenericAuthenticationProvider(
@@ -140,8 +140,8 @@ namespace CK.DB.User.UserTwitter.Tests
         [Test]
         public async Task standard_generic_tests_for_Twitter_provider_Async()
         {
-            var auth = TestHelper.StObjMap.StObjs.Obtain<Auth.Package>();
-            var f = TestHelper.StObjMap.StObjs.Obtain<IPocoFactory<IUserTwitterInfo>>();
+            var auth = SharedEngine.Map.StObjs.Obtain<Auth.Package>();
+            var f = SharedEngine.Map.StObjs.Obtain<IPocoFactory<IUserTwitterInfo>>();
             Throw.DebugAssert( auth != null && f != null );
             await Auth.Tests.AuthTests.StandardTestForGenericAuthenticationProviderAsync(
                 auth,
