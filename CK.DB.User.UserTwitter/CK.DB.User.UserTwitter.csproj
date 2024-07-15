@@ -3,13 +3,10 @@
     <TargetFramework>net8.0</TargetFramework>
     <Description>This package defines tUserTwitter table.</Description>
   </PropertyGroup>
-  
   <ItemGroup>
-    <PackageReference Include="CK.DB.Auth" Version="0.0.0--04yzfbn-develop" />
+    <PackageReference Include="CK.DB.Auth" Version="0.0.0--04z7c0b-develop" />
   </ItemGroup>
-  
   <ItemGroup>
     <EmbeddedResource Include="**\*.sql;**\*.tql;**\*.y4" />
   </ItemGroup>
-
-  </Project>
+</Project>

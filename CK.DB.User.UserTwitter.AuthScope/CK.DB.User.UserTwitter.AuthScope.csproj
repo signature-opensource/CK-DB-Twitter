@@ -3,14 +3,11 @@
     <TargetFramework>net8.0</TargetFramework>
     <Description>This package adds a ScopeSetId column to CK.tUserTwitter table.</Description>
   </PropertyGroup>
-  
   <ItemGroup>
-    <PackageReference Include="CK.DB.Auth.AuthScope" Version="0.0.0--04yzfbn-develop" />
+    <PackageReference Include="CK.DB.Auth.AuthScope" Version="0.0.0--04z7c0b-develop" />
     <ProjectReference Include="..\CK.DB.User.UserTwitter\CK.DB.User.UserTwitter.csproj" />
   </ItemGroup>
-  
   <ItemGroup>
     <EmbeddedResource Include="**\*.sql;**\*.tql;**\*.y4" />
   </ItemGroup>
-  
 </Project>
