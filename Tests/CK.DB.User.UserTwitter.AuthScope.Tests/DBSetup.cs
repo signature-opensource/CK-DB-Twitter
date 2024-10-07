@@ -5,10 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CK.DB.User.UserTwitter.AuthScope.Tests
+namespace CK.DB.User.UserTwitter.AuthScope.Tests;
+
+[TestFixture]
+public class DBSetup : CK.DB.Tests.DBSetup
 {
-    [TestFixture]
-    public class DBSetup : CK.DB.Tests.DBSetup
-    {
-    }
 }
