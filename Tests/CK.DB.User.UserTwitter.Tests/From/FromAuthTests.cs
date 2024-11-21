@@ -5,10 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CK.DB.User.UserTwitter.Tests.From
+namespace CK.DB.User.UserTwitter.Tests.From;
+
+[TestFixture]
+public class FromAuthTests : CK.DB.Auth.Tests.AuthTests
 {
-    [TestFixture]
-    public class FromAuthTests : CK.DB.Auth.Tests.AuthTests
-    {
-    }
 }
