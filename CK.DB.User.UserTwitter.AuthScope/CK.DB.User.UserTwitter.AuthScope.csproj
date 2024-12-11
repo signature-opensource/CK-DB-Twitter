@@ -4,7 +4,7 @@
     <Description>This package adds a ScopeSetId column to CK.tUserTwitter table.</Description>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CK.DB.Auth.AuthScope" Version="22.0.1--0007-develop" />
+    <PackageReference Include="CK.DB.Auth.AuthScope" Version="22.0.1--0008-develop" />
     <ProjectReference Include="..\CK.DB.User.UserTwitter\CK.DB.User.UserTwitter.csproj" />
   </ItemGroup>
   <ItemGroup>
