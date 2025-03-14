@@ -2,7 +2,7 @@ using CK.Core;
 using CK.DB.Actor;
 using CK.SqlServer;
 using CK.Testing;
-using FluentAssertions;
+using Shouldly;
 using NUnit.Framework;
 using System;
 using System.Threading;
@@ -30,20 +30,20 @@ public class UserTwitterAccessTokenTests
             twitter.CreateOrUpdateTwitterUser( ctx, 1, idU, info );
             string rawSelect = $"select AccessToken+'|'+cast(LastWriteTime as varchar) from CK.tUserTwitter where UserId={idU}";
             twitter.Database.ExecuteScalar( rawSelect )
-                .Should().Be( "|0001-01-01 00:00:00.00" );
+                .ShouldBe( "|0001-01-01 00:00:00.00" );
 
             info.AccessToken = "an access token";
             info.AccessTokenSecret = "...and its secret...";
             twitter.CreateOrUpdateTwitterUser( ctx, 1, idU, info );
             rawSelect = $"select AccessToken + AccessTokenSecret from CK.tUserTwitter where UserId={idU}";
             twitter.Database.ExecuteScalar( rawSelect )
-                .Should().Be( "an access token...and its secret..." );
+                .ShouldBe( "an access token...and its secret..." );
 
             info = (IUserTwitterInfo?)twitter.FindKnownUserInfo( ctx, twitterAccountId )?.Info;
             Throw.DebugAssert( info != null );
-            info.LastWriteTime.Should().BeAfter( DateTime.UtcNow.AddMonths( -1 ) );
-            info.AccessToken.Should().Be( "an access token" );
-            info.AccessTokenSecret.Should().Be( "...and its secret..." );
+            info.LastWriteTime.ShouldBeGreaterThan( DateTime.UtcNow.AddMonths( -1 ) );
+            info.AccessToken.ShouldBe( "an access token" );
+            info.AccessTokenSecret.ShouldBe( "...and its secret..." );
 
             var lastUpdate = info.LastWriteTime;
             Thread.Sleep( 500 );
@@ -52,9 +52,9 @@ public class UserTwitterAccessTokenTests
             twitter.CreateOrUpdateTwitterUser( ctx, 1, idU, info );
             info = (IUserTwitterInfo?)twitter.FindKnownUserInfo( ctx, twitterAccountId )?.Info;
             Throw.DebugAssert( info != null );
-            info.LastWriteTime.Should().Be( lastUpdate );
-            info.AccessToken.Should().Be( "an access token" );
-            info.AccessTokenSecret.Should().Be( "...and its secret..." );
+            info.LastWriteTime.ShouldBe( lastUpdate );
+            info.AccessToken.ShouldBe( "an access token" );
+            info.AccessTokenSecret.ShouldBe( "...and its secret..." );
         }
     }
 
@@ -76,33 +76,33 @@ public class UserTwitterAccessTokenTests
             info.AccessToken = info.AccessTokenSecret = "token info";
             twitter.CreateOrUpdateTwitterUser( ctx, 1, idU, info );
             twitter.Database.ExecuteScalar( $"select AccessToken + '|' + AccessTokenSecret from CK.tUserTwitter where UserId={idU}" )
-                .Should().Be( "token info|token info" );
+                .ShouldBe( "token info|token info" );
 
             tokens.SetAllowTokenStorage( ctx, 1, idU, true );
             twitter.Database.ExecuteScalar( $"select AccessToken + '|' + AccessTokenSecret from CK.tUserTwitter where UserId={idU}" )
-                .Should().Be( "token info|token info", "Setting to true preserves the existing tokens (if any)." );
+                .ShouldBe( "token info|token info", "Setting to true preserves the existing tokens (if any)." );
 
             tokens.SetAllowTokenStorage( ctx, 1, idU, false );
             twitter.Database.ExecuteScalar( $"select AccessToken + '|' + AccessTokenSecret from CK.tUserTwitter where UserId={idU}" )
-                .Should().Be( UserTwitterInfoExtensions.NoAccessTokenMarker + '|' + UserTwitterInfoExtensions.NoAccessTokenMarker,
+                .ShouldBe( UserTwitterInfoExtensions.NoAccessTokenMarker + '|' + UserTwitterInfoExtensions.NoAccessTokenMarker,
                               "Setting to false sets both markers." );
 
             info.AccessToken = "Will be ignored.";
             info.AccessTokenSecret = "Will be ignored either.";
             twitter.CreateOrUpdateTwitterUser( ctx, 1, idU, info );
             twitter.Database.ExecuteScalar( $"select AccessToken + '|' + AccessTokenSecret from CK.tUserTwitter where UserId={idU}" )
-                .Should().Be( UserTwitterInfoExtensions.NoAccessTokenMarker + '|' + UserTwitterInfoExtensions.NoAccessTokenMarker,
+                .ShouldBe( UserTwitterInfoExtensions.NoAccessTokenMarker + '|' + UserTwitterInfoExtensions.NoAccessTokenMarker,
                               "Markers are here to stay..." );
 
             tokens.SetAllowTokenStorage( ctx, 1, idU, true );
             twitter.Database.ExecuteScalar( $"select AccessToken + '|' + AccessTokenSecret from CK.tUserTwitter where UserId={idU}" )
-                .Should().Be( "|", "Setting to true clears the markers." );
+                .ShouldBe( "|", "Setting to true clears the markers." );
 
             info.AccessToken = "Will NOT be ignored.";
             info.AccessTokenSecret = "HERE.";
             twitter.CreateOrUpdateTwitterUser( ctx, 1, idU, info );
             twitter.Database.ExecuteScalar( $"select AccessToken + '|' + AccessTokenSecret from CK.tUserTwitter where UserId={idU}" )
-                .Should().Be( "Will NOT be ignored.|HERE.", "Back to normal." );
+                .ShouldBe( "Will NOT be ignored.|HERE.", "Back to normal." );
 
         }
     }
