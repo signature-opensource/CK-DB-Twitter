@@ -6,7 +6,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CK.DB.User.UserTwitter\CK.DB.User.UserTwitter.csproj" />
-    <PackageReference Include="CK.DB.Auth.Tests" Version="23.1.1--0025-develop" />
+    <PackageReference Include="CK.DB.Auth.Tests" Version="23.1.1--0026-develop" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
   </ItemGroup>
