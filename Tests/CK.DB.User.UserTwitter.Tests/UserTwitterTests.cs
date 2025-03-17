@@ -3,7 +3,7 @@ using CK.DB.Actor;
 using CK.DB.Auth;
 using CK.SqlServer;
 using CK.Testing;
-using FluentAssertions;
+using Shouldly;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -31,15 +31,15 @@ public class UserTwitterTests
             var info = infoFactory.Create();
             info.TwitterAccountId = twitterAccountId;
             var created = u.CreateOrUpdateTwitterUser( ctx, 1, userId, info );
-            created.OperationResult.Should().Be( UCResult.Created );
+            created.OperationResult.ShouldBe( UCResult.Created );
             var info2 = u.FindKnownUserInfo( ctx, twitterAccountId );
             Throw.DebugAssert( info2 != null );
-            info2.UserId.Should().Be( userId );
-            info2.Info.TwitterAccountId.Should().Be( twitterAccountId );
+            info2.UserId.ShouldBe( userId );
+            info2.Info.TwitterAccountId.ShouldBe( twitterAccountId );
 
-            u.FindKnownUserInfo( ctx, Guid.NewGuid().ToString() ).Should().BeNull();
+            u.FindKnownUserInfo( ctx, Guid.NewGuid().ToString() ).ShouldBeNull();
             user.DestroyUser( ctx, 1, userId );
-            u.FindKnownUserInfo( ctx, twitterAccountId ).Should().BeNull();
+            u.FindKnownUserInfo( ctx, twitterAccountId ).ShouldBeNull();
         }
     }
 
@@ -59,15 +59,15 @@ public class UserTwitterTests
             var info = infoFactory.Create();
             info.TwitterAccountId = TwitterAccountId;
             var created = await u.CreateOrUpdateTwitterUserAsync( ctx, 1, userId, info );
-            created.OperationResult.Should().Be( UCResult.Created );
+            created.OperationResult.ShouldBe( UCResult.Created );
             var info2 = await u.FindKnownUserInfoAsync( ctx, TwitterAccountId );
             Throw.DebugAssert( info2 != null );
-            info2.UserId.Should().Be( userId );
-            info2.Info.TwitterAccountId.Should().Be( TwitterAccountId );
+            info2.UserId.ShouldBe( userId );
+            info2.Info.TwitterAccountId.ShouldBe( TwitterAccountId );
 
-            (await u.FindKnownUserInfoAsync( ctx, Guid.NewGuid().ToString() )).Should().BeNull();
+            (await u.FindKnownUserInfoAsync( ctx, Guid.NewGuid().ToString() )).ShouldBeNull();
             await user.DestroyUserAsync( ctx, 1, userId );
-            (await u.FindKnownUserInfoAsync( ctx, TwitterAccountId )).Should().BeNull();
+            (await u.FindKnownUserInfoAsync( ctx, TwitterAccountId )).ShouldBeNull();
         }
     }
 
@@ -90,15 +90,15 @@ public class UserTwitterTests
             var TwitterAccountId = Guid.NewGuid().ToString( "N" );
             var idU = user.CreateUser( ctx, 1, userName );
             u.Database.ExecuteReader( $"select * from CK.vUserAuthProvider where UserId={idU} and Scheme='Twitter'" )!
-                .Rows.Should().BeEmpty();
+                .Rows.ShouldBeEmpty();
             var info = u.CreateUserInfo<IUserTwitterInfo>();
             info.TwitterAccountId = TwitterAccountId;
             u.CreateOrUpdateTwitterUser( ctx, 1, idU, info );
             u.Database.ExecuteScalar( $"select count(*) from CK.vUserAuthProvider where UserId={idU} and Scheme='Twitter'" )
-                .Should().Be( 1 );
+                .ShouldBe( 1 );
             u.DestroyTwitterUser( ctx, 1, idU );
             u.Database.ExecuteReader( $"select * from CK.vUserAuthProvider where UserId={idU} and Scheme='Twitter'" )!
-                .Rows.Should().BeEmpty();
+                .Rows.ShouldBeEmpty();
         }
     }
 

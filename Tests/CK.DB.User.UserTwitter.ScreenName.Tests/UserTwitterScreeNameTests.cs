@@ -2,7 +2,7 @@ using CK.Core;
 using CK.DB.Actor;
 using CK.SqlServer;
 using CK.Testing;
-using FluentAssertions;
+using Shouldly;
 using NUnit.Framework;
 using System;
 using static CK.Testing.MonitorTestHelper;
@@ -28,15 +28,15 @@ public class UserTwitterScreenNameTests
             info.ScreenName = "Albert";
             u.CreateOrUpdateTwitterUser( ctx, 1, idU, info );
             string rawSelect = $"select ScreenName from CK.tUserTwitter where UserId={idU}";
-            u.Database.ExecuteScalar( rawSelect ).Should().Be( "Albert" );
+            u.Database.ExecuteScalar( rawSelect ).ShouldBe( "Albert" );
             info.ScreenName = null;
             u.CreateOrUpdateTwitterUser( ctx, 1, idU, info );
-            u.Database.ExecuteScalar( rawSelect ).Should().Be( "Albert" );
+            u.Database.ExecuteScalar( rawSelect ).ShouldBe( "Albert" );
 
             info = (IUserTwitterInfo?)u.FindKnownUserInfo( ctx, twitterAccountId )?.Info;
             Throw.DebugAssert( info != null );
-            info.ScreenName.Should().Be( "Albert" );
-            info.TwitterAccountId.Should().Be( twitterAccountId );
+            info.ScreenName.ShouldBe( "Albert" );
+            info.TwitterAccountId.ShouldBe( twitterAccountId );
         }
     }
 
