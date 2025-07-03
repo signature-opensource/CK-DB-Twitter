@@ -4,7 +4,7 @@
     <Description>This package defines tUserTwitter table.</Description>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CK.DB.Auth" Version="24.1.0" />
+    <PackageReference Include="CK.DB.Auth" Version="24.1.1--0001-develop" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="**\*.sql;**\*.tql;**\*.y4" />
