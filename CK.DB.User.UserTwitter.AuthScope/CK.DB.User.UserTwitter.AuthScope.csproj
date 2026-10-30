@@ -1,13 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
-    <Description>This package adds a ScopeSetId column to CK.tUserTwitter table.</Description>
+    <!-- Tombstone: no assembly, no dependencies. -->
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+    <!-- NU5128: the package has no lib/ folder, on purpose. -->
+    <NoWarn>$(NoWarn);NU5128</NoWarn>
+    <Description>Deprecated (see its README).</Description>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CK.DB.Auth.AuthScope" Version="30.0.3-0.cris-auth.0.ci.10" />
-    <ProjectReference Include="..\CK.DB.User.UserTwitter\CK.DB.User.UserTwitter.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="**\*.sql;**\*.tql;**\*.y4" />
+    <Content Include="MSBuild/CK.DB.User.UserTwitter.AuthScope.targets">
+      <Pack>true</Pack>
+      <PackagePath>buildTransitive\CK.DB.User.UserTwitter.AuthScope.targets</PackagePath>
+    </Content>
   </ItemGroup>
 </Project>
